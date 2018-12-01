@@ -1,11 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { Segment, Header, Grid } from 'semantic-ui-react';
+import ActivePlayers from './ActivePlayers';
+import BenchPlayers from './BenchPlayers';
 
-const HomeTeam = () => {
+const HomeTeam = ({homeTeam}) => {
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <Segment>
+      <Header>Home Team</Header>
+      <Grid>
+        <ActivePlayers activePlayers={homeTeam.active}/>
+        <BenchPlayers benchPlayers={homeTeam.bench} />
+      </Grid>
+    </Segment>
+  );
+};
 
-export default HomeTeam
+export default HomeTeam;
