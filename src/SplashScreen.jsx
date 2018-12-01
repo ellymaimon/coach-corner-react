@@ -11,7 +11,6 @@ const SplashScreen = ({ setGame }) => {
         onClick={() => setGame(true)}
         style={{ maxWidth: 200, margin: '0 auto' }}
         fluid
-        center
         color='orange'
       >
         Play
