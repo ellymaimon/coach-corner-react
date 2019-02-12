@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Segment, Header } from 'semantic-ui-react';
 
 const AwayTeam = () => {
@@ -6,7 +6,7 @@ const AwayTeam = () => {
     <Segment>
       <Header>Away Team</Header>
     </Segment>
-  )
-}
+  );
+};
 
-export default AwayTeam
+export default AwayTeam;

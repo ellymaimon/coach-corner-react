@@ -9,10 +9,10 @@ const GameScreen = () => {
     <Grid>
       <Grid.Row>
         <Grid.Column width={8}>
-          <HomeTeam homeTeam={teams.home}/>
+          <HomeTeam homeTeam={teams.home} />
         </Grid.Column>
         <Grid.Column width={8}>
-          <AwayTeam awayTeam={teams.away}/>
+          <AwayTeam awayTeam={teams.away} />
         </Grid.Column>
       </Grid.Row>
     </Grid>

@@ -4,11 +4,12 @@ import { Container } from 'semantic-ui-react';
 import GameScreen from './GameScreen';
 
 const App = () => {
-  const [game, setGame] = useState(false);
-  
+  // State to determine if game is currently being played
+  const [game, setGame] = useState(true);
+
   return (
     <Container style={{ marginTop: '2em' }}>
-    {game ? <GameScreen /> :  <SplashScreen setGame={setGame} />}
+      {game ? <GameScreen /> : <SplashScreen setGame={setGame} />}
     </Container>
   );
 };

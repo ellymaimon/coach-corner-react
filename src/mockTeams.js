@@ -20,7 +20,7 @@ const createPlayer = () => {
     lastName: getLastName(),
     offense: getRandom(0, 10),
     defense: getRandom(0, 10),
-    stamina: 10
+    stamina: 10,
   };
   return player;
 };
@@ -28,10 +28,10 @@ const createPlayer = () => {
 export const teams = {
   home: {
     active: [createPlayer(), createPlayer(), createPlayer()],
-    bench: [createPlayer(), createPlayer(), createPlayer()]
+    bench: [createPlayer(), createPlayer(), createPlayer()],
   },
   away: {
     active: [createPlayer(), createPlayer(), createPlayer()],
-    bench: [createPlayer(), createPlayer(), createPlayer()]
-  }
+    bench: [createPlayer(), createPlayer(), createPlayer()],
+  },
 };
