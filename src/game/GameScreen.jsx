@@ -1,13 +1,27 @@
 import React from 'react';
-import HomeTeam from './HomeTeam';
-import AwayTeam from './AwayTeam';
+import styled from 'styled-components';
+import Team from './Team';
 import { teams } from '../teamGenerator';
+
+const GameGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+`;
 
 const GameScreen = () => {
   return (
-    <div style={{ maxWidth: 900, margin: '0 auto' }}>
-      <HomeTeam homeTeam={teams.home} />
-      <AwayTeam awayTeam={teams.away} />
+    <div style={{ maxWidth: 900, margin: '0 20px' }}>
+      <GameGrid>
+        <div>
+          <h2>Home Team</h2>
+          <Team team={teams.home} />
+        </div>
+        <div>
+          <h2>Away Team</h2>
+          <Team team={teams.away} />
+        </div>
+      </GameGrid>
     </div>
   );
 };

@@ -4,7 +4,8 @@ const Player = ({ player }) => {
   const { firstName, lastName, offense, defense, stamina } = player;
   return (
     <div>
-      {firstName} {lastName} O: {offense} D: {defense} S: {stamina}
+      {firstName} {lastName} Offense: {offense} Defense: {defense} Stamina:{' '}
+      {stamina}
     </div>
   );
 };

@@ -18,8 +18,8 @@ const createPlayer = () => {
     id: v4(),
     firstName: getFirstName(),
     lastName: getLastName(),
-    offense: getRandom(0, 10),
-    defense: getRandom(0, 10),
+    offense: getRandom(0, 100),
+    defense: getRandom(0, 100),
     stamina: 10,
   };
   return player;
