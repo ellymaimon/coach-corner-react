@@ -1,12 +1,11 @@
 import React from 'react';
-import { Grid } from 'semantic-ui-react';
 
 const Player = ({ player }) => {
   const { firstName, lastName, offense, defense, stamina } = player;
   return (
-    <Grid.Row>
+    <div>
       {firstName} {lastName} O: {offense} D: {defense} S: {stamina}
-    </Grid.Row>
+    </div>
   );
 };
 
