@@ -21,6 +21,7 @@ const createPlayer = () => {
     offense: getRandom(0, 100),
     defense: getRandom(0, 100),
     stamina: 10,
+    points: 0,
   };
   return player;
 };
