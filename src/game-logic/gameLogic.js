@@ -25,3 +25,12 @@ const gameLogic = teams => {
     secondsRemaining: 0,
   };
 };
+
+const gameOver = game => {
+  const { currentQuarter, minutesRemaining, secondsRemaining } = game;
+  return currentQuarter === 4 &&
+    minutesRemaining === 0 &&
+    secondsRemaining === 0
+    ? true
+    : false;
+};
