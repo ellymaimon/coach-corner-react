@@ -1,31 +1,8 @@
-import { teams } from '../teamGenerator';
-
-console.log(teams);
-
 const getRandom = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const gameLogic = teams => {
-  let currentGame = {
-    homeTeam: {
-      active: teams.home.active,
-      bench: teams.home.bench,
-      timeouts: 2,
-    },
-    awayTeam: {
-      active: teams.away.active,
-      bench: teams.away.bench,
-      timeouts: 2,
-    },
-    currentQuarter: 1,
-    homeScore: 0,
-    awayScore: 0,
-    minutesRemaining: 12,
-    secondsRemaining: 0,
-  };
-};
-
+// Boolean check for the end of a game
 const gameOver = game => {
   const { currentQuarter, minutesRemaining, secondsRemaining } = game;
   return currentQuarter === 4 &&
@@ -53,5 +30,50 @@ const attemptScore = (offensivePlayer, defensivePlayer) => {
     return 0;
   }
 };
+
+export const singlePosession = game => {
+  // Check if the game is over and stop simulation
+  if (gameOver(game)) {
+    game.isOver = true;
+    return game;
   }
+
+  // What happens during a posession?
+
+  // Each team attemps to score
+
+  // Get a random player from each team to be the off & def player
+  let homeOffensePlayer = game.homeTeam.active[getRandom(0, 2)];
+  let homeDefensePlayer = game.homeTeam.active[getRandom(0, 2)];
+  let awayOffensePlayer = game.awayTeam.active[getRandom(0, 2)];
+  let awayDefensePlayer = game.awayTeam.active[getRandom(0, 2)];
+
+  // If home team scores, add points to team and player
+  let homePointsScored = attemptScore(homeOffensePlayer, awayDefensePlayer);
+  game.homeTeam.points += homePointsScored;
+  homeOffensePlayer.points += homePointsScored;
+
+  // If away team scores, add points to team and player
+  let awayPointsScored = attemptScore(awayOffensePlayer, homeDefensePlayer);
+  game.awayTeam.points += awayPointsScored;
+  awayOffensePlayer.points += awayPointsScored;
+
+  // If its the end of the quarter, pause the game and reset clock
+  if (game.secondsRemaining === 0 && game.minutesRemaining === 0) {
+    game.currentQuarter++;
+    game.minutesRemaining = 12;
+    game.secondsRemaining = 0;
+    game.isPaused = true;
+    return game;
+  }
+
+  // Otherwise, 30 seconds tick off the clock
+  if (game.secondsRemaining > 0) {
+    game.secondsRemaining -= 30;
+  } else {
+    game.minutesRemaining--;
+    game.secondsRemaining = 30;
+  }
+
+  return game;
 };
