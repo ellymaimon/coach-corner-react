@@ -45,6 +45,22 @@ const GameLogicTest = () => {
     },
     gameRunning ? 200 : null
   );
+
+  const startGame = () => {
+    setGameRunning(true);
+  };
+
+  const stopGame = () => {
+    setGameRunning(false);
+  };
+
+  const reset = () => {
+    stopGame();
+    setSecondsRemaining(0);
+    setGame(initialGameState);
+    console.log(initialGameState);
+    
+  };
   return (
     <div>
       game logic test
