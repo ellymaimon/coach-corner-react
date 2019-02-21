@@ -24,6 +24,27 @@ const GameLogicTest = () => {
     isOver: false,
     isPaused: false,
   };
+
+  const [game, setGame] = useState(initialGameState);
+  const [secondsRemaining, setSecondsRemaining] = useState(0);
+  const [gameRunning, setGameRunning] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+
+  useInterval(
+    () => {
+      let updatedGame = singlePosession(game);
+      if (updatedGame.isOver === true) {
+        setGameOver(true);
+      }
+      if (updatedGame.isPaused === true) {
+        setGameRunning(false);
+        updatedGame.isPaused = false;
+      }
+      setGame(updatedGame);
+      setSecondsRemaining(game.secondsRemaining);
+    },
+    gameRunning ? 200 : null
+  );
   return (
     <div>
       game logic test
