@@ -35,11 +35,13 @@ const gameOver = game => {
     : false;
 };
 
+// Taking two players, sims a single posession and returns points
 const attemptScore = (offensivePlayer, defensivePlayer) => {
   let offenseRating = offensivePlayer.offense;
+  let defenseRating = defensivePlayer.defense;
   let missChance = getRandom(0, 100);
 
-  if (offenseRating > defensivePlayer.defense) {
+  if (defenseRating - offenseRating < 50) {
     if (Math.floor(offenseRating / 10) === Math.floor(missChance / 10)) {
       return 3;
     } else if (offenseRating > missChance) {
@@ -47,5 +49,9 @@ const attemptScore = (offensivePlayer, defensivePlayer) => {
     } else {
       return 0;
     }
+  } else {
+    return 0;
+  }
+};
   }
 };
