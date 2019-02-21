@@ -63,7 +63,34 @@ const GameLogicTest = () => {
   };
   return (
     <div>
-      game logic test
+      <h1>Game Logic Test</h1>
+      <h2>Scoreboard</h2>
+      {gameOver ? (
+        <h3>Game Over!</h3>
+      ) : (
+        <div>
+          <h3>
+            Time Remaining: {game.minutesRemaining}:
+            {secondsRemaining === 0 ? '00' : secondsRemaining}
+          </h3>
+          <h3>Quarter: {game.currentQuarter} </h3>
+        </div>
+      )}
+      <h3>Home Points: {game.homeTeam.points} </h3>
+      <h3>Away Points: {game.awayTeam.points} </h3>
+
+      {gameRunning ? (
+        <button onClick={() => stopGame()}>Stop Game</button>
+      ) : (
+        <button onClick={() => startGame()}>Start Game</button>
+      )}
+      <button onClick={() => reset()}>Reset</button>
+      
+      <h2>Home Team</h2>
+      <Team team={game.homeTeam}></Team>
+
+      <h2>Away Team</h2>
+      <Team team={game.awayTeam}></Team>
     </div>
   );
 };
