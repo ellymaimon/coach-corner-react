@@ -3,17 +3,13 @@ const getRandom = (min, max) => {
 };
 
 // Boolean check for the end of a game
-const gameOver = game => {
-  const { currentQuarter, minutesRemaining, secondsRemaining } = game;
-  return currentQuarter === 4 &&
-    minutesRemaining === 0 &&
-    secondsRemaining === 0
-    ? true
-    : false;
+const gameOver = store => {
+  const { quarter, minutes, seconds } = store.game;
+  return quarter === 4 && minutes === 0 && seconds === 0 ? true : false;
 };
 
 // Taking two players, sims a single posession and returns points
-const attemptScore = (offensivePlayer, defensivePlayer) => {
+const shoot = (offensivePlayer, defensivePlayer) => {
   let offenseRating = offensivePlayer.offense;
   let defenseRating = defensivePlayer.defense;
   let missChance = getRandom(0, 100);
@@ -31,49 +27,41 @@ const attemptScore = (offensivePlayer, defensivePlayer) => {
   }
 };
 
-export const singlePosession = game => {
-  // Check if the game is over and stop simulation
-  if (gameOver(game)) {
-    game.isOver = true;
-    return game;
+export const playGame = store => {
+  const { homeTeam, awayTeam, game } = store;
+  
+  if (gameOver(store)) {
+    store.gameStop();
+    return;
   }
 
-  // What happens during a posession?
-
-  // Each team attemps to score
-
   // Get a random player from each team to be the off & def player
-  let homeOffensePlayer = game.homeTeam.active[getRandom(0, 2)];
-  let homeDefensePlayer = game.homeTeam.active[getRandom(0, 2)];
-  let awayOffensePlayer = game.awayTeam.active[getRandom(0, 2)];
-  let awayDefensePlayer = game.awayTeam.active[getRandom(0, 2)];
+  let homeOffensePlayer = homeTeam.active[getRandom(0, 2)];
+  let homeDefensePlayer = homeTeam.active[getRandom(0, 2)];
+  let awayOffensePlayer = awayTeam.active[getRandom(0, 2)];
+  let awayDefensePlayer = awayTeam.active[getRandom(0, 2)];
 
   // If home team scores, add points to team and player
-  let homePointsScored = attemptScore(homeOffensePlayer, awayDefensePlayer);
-  game.homeTeam.points += homePointsScored;
+  let homePointsScored = shoot(homeOffensePlayer, awayDefensePlayer);
+  homeTeam.points += homePointsScored;
   homeOffensePlayer.points += homePointsScored;
 
   // If away team scores, add points to team and player
-  let awayPointsScored = attemptScore(awayOffensePlayer, homeDefensePlayer);
-  game.awayTeam.points += awayPointsScored;
+  let awayPointsScored = shoot(awayOffensePlayer, homeDefensePlayer);
+  awayTeam.points += awayPointsScored;
   awayOffensePlayer.points += awayPointsScored;
 
-  // If its the end of the quarter, pause the game and reset clock
-  if (game.secondsRemaining === 0 && game.minutesRemaining === 0) {
-    game.currentQuarter++;
-    game.minutesRemaining = 12;
-    game.secondsRemaining = 0;
-    game.isPaused = true;
-    return game;
-  }
-
-  // Otherwise, 30 seconds tick off the clock
-  if (game.secondsRemaining > 0) {
-    game.secondsRemaining -= 30;
+  // If its the end of the quarter, pause the game and reset clock, 
+  if (game.seconds === 0 && game.minutes === 0) {
+    game.quarter++;
+    game.minutes = 12;
+    game.seconds = 0;
   } else {
-    game.minutesRemaining--;
-    game.secondsRemaining = 30;
+    if (game.seconds > 0) {
+      game.seconds -= 30;
+    } else {
+      game.minutes--;
+      game.seconds = 30;
+    }
   }
-
-  return game;
 };
