@@ -22,17 +22,25 @@ const createPlayer = () => {
     defense: getRandom(0, 100),
     stamina: 10,
     points: 0,
+    stops: 0,
   };
   return player;
 };
 
-export const teams = {
+export let teams = {
   home: {
-    active: [createPlayer(), createPlayer(), createPlayer()],
-    bench: [createPlayer(), createPlayer(), createPlayer()],
+    active: [],
+    bench: [],
   },
   away: {
-    active: [createPlayer(), createPlayer(), createPlayer()],
-    bench: [createPlayer(), createPlayer(), createPlayer()],
+    active: [],
+    bench: [],
   },
 };
+
+for (let i = 1; i <= 12; i++) {
+  let team = i <= 6 ? 'home' : 'away';
+  let status = i < 4 || (i > 6 && i < 10) ? 'active' : 'bench';
+  teams[team][status].push(createPlayer());
+}
+
