@@ -8,20 +8,18 @@ const gameOver = store => {
   return quarter === 4 && minutes === 0 && seconds === 0 ? true : false;
 };
 
-// Taking two players, sims a single posession and returns points
-const shoot = (offensivePlayer, defensivePlayer) => {
-  let offenseRating = offensivePlayer.offense;
-  let defenseRating = defensivePlayer.defense;
+// Takes an offense rating and returns points earned
+const shoot = offense => {
   let missChance = getRandom(0, 100);
 
-  if (defenseRating - offenseRating < 50) {
-    if (Math.floor(offenseRating / 10) === Math.floor(missChance / 10)) {
+  if (Math.floor(offense / 10) === Math.floor(missChance / 10)) {
       return 3;
-    } else if (offenseRating > missChance) {
+  } else if (offense > missChance) {
       return 2;
     } else {
       return 0;
     }
+};
 
 // Runs a posession for a given offensive team and two players head to head
 const simPosession = (oTeam, o, d) => {
