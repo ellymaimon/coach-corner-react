@@ -5,21 +5,21 @@ import Team from '../game/Team';
 import './Scoreboard.css';
 
 const Scoreboard = observer(() => {
-  const store = useContext(Game);
+  const game = useContext(Game);
   return (
     <div>
       <div className='scoreboard'>
-        <div className='minutes'>{store.game.minutes}</div>
+        <div className='minutes'>{game.state.minutes}</div>
         <div className='colon-text'>:</div>
         <div className='seconds'>
-          {store.game.seconds === 0 ? '00' : store.game.seconds}
+          {game.state.seconds === 0 ? '00' : game.state.seconds}
         </div>
         <div className='home-text'>HOME</div>
         <div className='quarter-text'>Q</div>
         <div className='away-text'>AWAY</div>
-        <div className='home-score'>{store.homeTeam.points}</div>
-        <div className='quarter'>{store.game.quarter}</div>
-        <div className='away-score'>{store.awayTeam.points}</div>
+        <div className='home-score'>{game.homeTeam.points}</div>
+        <div className='quarter'>{game.state.quarter}</div>
+        <div className='away-score'>{game.awayTeam.points}</div>
       </div>
 
       {!game.state.isRunning ? (
@@ -28,11 +28,11 @@ const Scoreboard = observer(() => {
         <button className='btn' onClick={() => game.gameStop()}>Stop</button>
       )}
 
-      <h2>Home Team</h2>
-      <Team team={store.homeTeam} />
+      <h1>Home Team</h1>
+      <Team team={game.homeTeam} />
 
-      <h2>Away Team</h2>
-      <Team team={store.awayTeam} />
+      <h1>Away Team</h1>
+      <Team team={game.awayTeam} />
     </div>
   );
 });
