@@ -22,8 +22,22 @@ const shoot = (offensivePlayer, defensivePlayer) => {
     } else {
       return 0;
     }
+
+// Runs a posession for a given offensive team and two players head to head
+const simPosession = (oTeam, o, d) => {
+  let points = 0;
+  if (d.defense - o.offense > 25) {
+    d.stops++
   } else {
-    return 0;
+    points = shoot(o.offense);
+    o.shotsTaken++;
+    points === 0 ? o.misses++ : o.makes++;
+    o.fieldGoalPercentage = (o.makes/o.shotsTaken) * 100;
+    oTeam.points += points;
+    o.points += points;
+  }
+}
+
   }
 };
 
