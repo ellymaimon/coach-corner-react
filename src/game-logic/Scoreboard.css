@@ -1,0 +1,52 @@
+.scoreboard {
+  display: grid;
+  grid-template: 40% 20% 40% / 40% 20% 40%;
+  max-width: 500px;
+  height: 300px;
+  border: 1px solid blue;
+  margin: 20px auto;
+}
+
+.minutes {
+  place-self: center end;
+  font-size: 72px;
+}
+
+.colon-text {
+  place-self: center;
+  font-size: 72px;
+}
+
+.seconds {
+  place-self: center start;
+  font-size: 72px;
+}
+
+.home-text {
+  place-self: center;
+  font-size: 32px;
+}
+
+.quarter-text {
+  place-self: end center;
+  font-size: 24px;
+}
+
+.away-text {
+  place-self: center;
+  font-size: 32px;
+}
+
+.home-score {
+  place-self: center;
+  font-size: 72px;
+}
+
+.quarter {
+  place-self: center;
+  font-size: 36px;
+}
+.away-score {
+  place-self: center;
+  font-size: 72px;
+}
