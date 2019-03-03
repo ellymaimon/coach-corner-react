@@ -23,6 +23,10 @@ const createPlayer = () => {
     stamina: 10,
     points: 0,
     stops: 0,
+    makes: 0,
+    misses: 0,
+    shotsTaken: 0,
+    fieldGoalPercentage: 0,
   };
   return player;
 };
