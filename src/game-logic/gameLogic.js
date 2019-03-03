@@ -60,38 +60,30 @@ const decrementClock = game => {
 export const playGame = store => {
   const { homeTeam, awayTeam, game } = store;
   
-  if (gameOver(store)) {
-    store.gameStop();
+export const playGame = game => {
+  const { homeTeam, awayTeam, state } = game;
+
+  // If the game is over, stop the game
+  if (gameOver(state)) {
+    game.gameStop();
     return;
   }
 
-  // Get a random player from each team to be the off & def player
-  let homeOffensePlayer = homeTeam.active[getRandom(0, 2)];
-  let homeDefensePlayer = homeTeam.active[getRandom(0, 2)];
-  let awayOffensePlayer = awayTeam.active[getRandom(0, 2)];
-  let awayDefensePlayer = awayTeam.active[getRandom(0, 2)];
+  // Get a random O & D player from Home
+  let homeO = homeTeam.active[getRandom(0, 2)];
+  let homeD = homeTeam.active[getRandom(0, 2)];
 
-  // If home team scores, add points to team and player
-  let homePointsScored = shoot(homeOffensePlayer, awayDefensePlayer);
-  homeTeam.points += homePointsScored;
-  homeOffensePlayer.points += homePointsScored;
+  // Get a random O & D player from Away
+  let awayO = awayTeam.active[getRandom(0, 2)];
+  let awayD = awayTeam.active[getRandom(0, 2)];
 
-  // If away team scores, add points to team and player
-  let awayPointsScored = shoot(awayOffensePlayer, homeDefensePlayer);
-  awayTeam.points += awayPointsScored;
-  awayOffensePlayer.points += awayPointsScored;
+  // HOME ON OFFENSE //
+  simPosession(homeTeam, homeO, awayD);
+
+  // AWAY ON OFFENSE //
+  simPosession(awayTeam, awayO, homeD);
 
   // If its the end of the quarter, pause the game and reset clock, 
-  if (game.seconds === 0 && game.minutes === 0) {
-    game.quarter++;
-    game.minutes = 12;
-    game.seconds = 0;
-  } else {
-    if (game.seconds > 0) {
-      game.seconds -= 30;
-    } else {
-      game.minutes--;
-      game.seconds = 30;
-    }
-  }
+  // otherwise decrement the clock appropriately.
+  decrementClock(game);
 };
