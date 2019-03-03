@@ -1,0 +1,10 @@
+.category-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  max-width: 500px;
+  border: 1px solid green;
+  height: 50px;
+  align-items: center;
+  text-align: center;
+  margin: 10px 10px;
+}
