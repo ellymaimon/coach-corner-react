@@ -20,8 +20,8 @@ export class Game {
   }
 
   awayTeam = {
-    active: teams.home.active,
-    bench: teams.home.bench,
+    active: teams.away.active,
+    bench: teams.away.bench,
     timeouts: 2,
     points: 0,
   }
