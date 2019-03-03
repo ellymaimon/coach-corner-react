@@ -38,8 +38,24 @@ const simPosession = (oTeam, o, d) => {
   }
 }
 
+// Decreases the clock depending on its current state
+const decrementClock = game => {
+  const {state} = game;
+  if (state.seconds === 0 && state.minutes === 0) {
+    state.quarter++;
+    state.minutes = 12;
+    state.seconds = 0;
+    game.gameStop();
+    state.isRunning = false;
+  } else {
+    if (state.seconds > 0) {
+      state.seconds -= 30;
+    } else {
+      state.minutes--;
+      state.seconds = 30;
   }
-};
+  }
+}
 
 export const playGame = store => {
   const { homeTeam, awayTeam, game } = store;
