@@ -22,10 +22,10 @@ const Scoreboard = observer(() => {
         <div className='away-score'>{store.awayTeam.points}</div>
       </div>
 
-      {!store.game.isRunning ? (
-        <button onClick={() => store.gameStart()}>Start</button>
+      {!game.state.isRunning ? (
+        <button className='btn' onClick={() => game.gameStart()}>Start</button>
       ) : (
-        <button onClick={() => store.gameStop()}>Stop</button>
+        <button className='btn' onClick={() => game.gameStop()}>Stop</button>
       )}
 
       <h2>Home Team</h2>
