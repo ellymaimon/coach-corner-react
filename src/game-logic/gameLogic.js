@@ -2,9 +2,9 @@ const getRandom = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-// Boolean check for the end of a game
-const gameOver = store => {
-  const { quarter, minutes, seconds } = store.game;
+// Checks if the game is over
+const gameOver = state => {
+  const { quarter, minutes, seconds } = state;
   return quarter === 4 && minutes === 0 && seconds === 0 ? true : false;
 };
 
@@ -13,12 +13,12 @@ const shoot = offense => {
   let missChance = getRandom(0, 100);
 
   if (Math.floor(offense / 10) === Math.floor(missChance / 10)) {
-      return 3;
+    return 3;
   } else if (offense > missChance) {
-      return 2;
-    } else {
-      return 0;
-    }
+    return 2;
+  } else {
+    return 0;
+  }
 };
 
 // Runs a posession for a given offensive team and two players head to head
@@ -51,13 +51,11 @@ const decrementClock = game => {
     } else {
       state.minutes--;
       state.seconds = 30;
-  }
+    }
   }
 }
 
-export const playGame = store => {
-  const { homeTeam, awayTeam, game } = store;
-  
+
 export const playGame = game => {
   const { homeTeam, awayTeam, state } = game;
 
@@ -81,7 +79,7 @@ export const playGame = game => {
   // AWAY ON OFFENSE //
   simPosession(awayTeam, awayO, homeD);
 
-  // If its the end of the quarter, pause the game and reset clock, 
+  // If its the end of the quarter, pause the game and reset clock,
   // otherwise decrement the clock appropriately.
   decrementClock(game);
 };
