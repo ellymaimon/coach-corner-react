@@ -4,7 +4,7 @@ import { teams } from '../teamGenerator';
 import { playGame } from './gameLogic';
 
 export class Game {
-  game = {
+  state = {
     quarter: 1,
     minutes: 12,
     seconds: 0,
@@ -32,17 +32,29 @@ export class Game {
 
   gameStart = () => {
     this.intervalId = setInterval(() => this.runGame(), 200);
-    this.game.isRunning = true;
+    this.state.isRunning = true;
   };
 
   gameStop = () => {
     if (this.intervalId) clearInterval(this.intervalId);
-    this.game.isRunning = false;
+    this.state.isRunning = false;
+    this.state.isOver = true;
   };
+
+  // reset = () => {
+  //   this.game = {
+  //     quarter: 1,
+  //     minutes: 12,
+  //     seconds: 0,
+  //     isOver: false,
+  //     isRunning: false,
+  //   };
+
+  // }
 }
 
 decorate(Game, {
-  game: observable,
+  state: observable,
   homeTeam: observable,
   awayTeam: observable,
 });
