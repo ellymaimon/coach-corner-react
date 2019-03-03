@@ -5,6 +5,7 @@ import ActivePlayers from './ActivePlayers';
 const Team = ({ team }) => {
   return (
     <div>
+      <h2>Active Players</h2>
       <ActivePlayers activePlayers={team.active} />
       {/* <BenchPlayers benchPlayers={team.bench} /> */}
     </div>
