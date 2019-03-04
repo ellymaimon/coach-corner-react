@@ -23,16 +23,25 @@ const Scoreboard = observer(() => {
       </div>
 
       {!game.state.isRunning ? (
-        <button className='btn' onClick={() => game.gameStart()}>Start</button>
+        <button className='btn' onClick={() => game.gameStart()}>
+          Start
+        </button>
       ) : (
-        <button className='btn' onClick={() => game.gameStop()}>Stop</button>
+        <button className='btn' onClick={() => game.gameStop()}>
+          Stop
+        </button>
       )}
 
-      <h1>Home Team</h1>
-      <Team team={game.homeTeam} />
-
-      <h1>Away Team</h1>
-      <Team team={game.awayTeam} />
+      <div className='boxscore'>
+        <div className='boxscore-home'>
+          <h1>Home Team</h1>
+          <Team team={game.homeTeam} />
+        </div>
+        <div className='boxscore-away'>
+          <h1>Away Team</h1>
+          <Team team={game.awayTeam} />
+        </div>
+      </div>
     </div>
   );
 });

@@ -64,3 +64,10 @@
   left: 50%;
   transform: translateX(-50%);
 }
+
+.boxscore {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin-top: 20px;
+  padding: 50px;
+}
