@@ -1,13 +1,14 @@
 import React from 'react';
-import ActivePlayers from './ActivePlayers';
-// import BenchPlayers from './BenchPlayers';
+import Players from './Players';
 
 const Team = ({ team }) => {
   return (
     <div>
       <h2>Active Players</h2>
-      <ActivePlayers activePlayers={team.active} />
-      {/* <BenchPlayers benchPlayers={team.bench} /> */}
+      <Players players={team.active} />
+
+      <h2>Bench Players</h2>
+      <Players players={team.bench} />
     </div>
   );
 };
