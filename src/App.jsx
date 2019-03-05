@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SplashScreen from './splash/SplashScreen';
-import Scoreboard from './game-logic/Scoreboard';
+import GameContainer from './game/GameContainer';
 import './App.css';
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
 
   return (
     <div className='app' style={{ marginTop: '2em' }}>
-      {game ? <Scoreboard /> : <SplashScreen setGame={setGame} />}
+      {game ? <GameContainer /> : <SplashScreen setGame={setGame} />}
     </div>
   );
 };
