@@ -1,5 +1,6 @@
 import React from 'react';
 import Players from './Players';
+import './Team.css';
 
 const Team = ({ team }) => {
   return (
