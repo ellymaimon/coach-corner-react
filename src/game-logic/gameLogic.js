@@ -55,7 +55,6 @@ const decrementClock = game => {
   }
 }
 
-
 export const playGame = game => {
   const { homeTeam, awayTeam, state } = game;
 

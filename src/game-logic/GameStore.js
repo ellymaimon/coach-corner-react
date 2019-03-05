@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { decorate, observable } from "mobx";
-import { teams } from '../teamGenerator';
+import { teams } from './teamGenerator';
 import { playGame } from './gameLogic';
 
 export class Game {
@@ -40,17 +40,6 @@ export class Game {
     this.state.isRunning = false;
     this.state.isOver = true;
   };
-
-  // reset = () => {
-  //   this.game = {
-  //     quarter: 1,
-  //     minutes: 12,
-  //     seconds: 0,
-  //     isOver: false,
-  //     isRunning: false,
-  //   };
-
-  // }
 }
 
 decorate(Game, {
