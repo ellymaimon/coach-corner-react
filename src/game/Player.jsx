@@ -2,7 +2,7 @@ import React from 'react';
 import './Player.css';
 
 const Player = ({ player }) => {
-  const { firstName, lastName, offense, defense, stamina, points, stops, fieldGoalPercentage } = player;
+  const { firstName, lastName, offense, defense, stamina, endurance, points, stops, fieldGoalPercentage } = player;
   return (
     <div className='player-container'>
       <div>
@@ -10,6 +10,7 @@ const Player = ({ player }) => {
       </div>
       <div>{offense}</div>
       <div>{defense}</div>
+      <div>{endurance}</div>
       <div>{stamina}</div>
       <div>{points}</div>
       <div>{stops}</div>
