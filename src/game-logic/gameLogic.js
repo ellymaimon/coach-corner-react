@@ -23,6 +23,18 @@ const shoot = (offense, stamina) => {
   }
 };
 
+const lowerEnergy = player => {
+  if (player.endurance <= 100 && player.endurance > 75) {
+    player.stamina >= 10 ? (player.stamina -= 10) : (player.stamina = 0);
+  } else if (player.endurance <= 75 && player.endurance > 50) {
+    player.stamina >= 15 ? (player.stamina -= 15) : (player.stamina = 0);
+  } else if (player.endurance <= 50 && player.endurance > 25) {
+    player.stamina >= 20 ? (player.stamina -= 20) : (player.stamina = 0);
+  } else if (player.endurance <= 25 && player.endurance >= 0) {
+    player.stamina >= 25 ? (player.stamina -= 25) : (player.stamina = 0);
+  }
+};
+
 // Runs a posession for a given offensive team and two players head to head
 const simPosession = (oTeam, o, d) => {
   let points = 0;
