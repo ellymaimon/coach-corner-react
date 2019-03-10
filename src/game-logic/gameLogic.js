@@ -9,10 +9,12 @@ const gameOver = state => {
 };
 
 // Takes an offense rating and returns points earned
-const shoot = offense => {
+const shoot = (offense, stamina) => {
   let missChance = getRandom(0, 100);
+  let fatigue = (100 - stamina) / 2;
+  missChance += fatigue;
 
-  if (Math.floor(offense / 10) === Math.floor(missChance / 10)) {
+  if (Math.floor(offense / 10) === Math.floor(missChance / 10) && stamina > 0) {
     return 3;
   } else if (offense > missChance) {
     return 2;
