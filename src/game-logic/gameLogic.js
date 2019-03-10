@@ -37,22 +37,23 @@ const lowerEnergy = player => {
 
 // Runs a posession for a given offensive team and two players head to head
 const simPosession = (oTeam, o, d) => {
+  lowerEnergy(o);
   let points = 0;
   if (d.defense - o.offense > 25) {
-    d.stops++
+    d.stops++;
   } else {
-    points = shoot(o.offense);
+    points = shoot(o.offense, o.stamina);
     o.shotsTaken++;
     points === 0 ? o.misses++ : o.makes++;
-    o.fieldGoalPercentage = (o.makes/o.shotsTaken) * 100;
+    o.fieldGoalPercentage = (o.makes / o.shotsTaken) * 100;
     oTeam.points += points;
     o.points += points;
   }
-}
+};
 
 // Decreases the clock depending on its current state
 const decrementClock = game => {
-  const {state} = game;
+  const { state } = game;
   if (state.seconds === 0 && state.minutes === 0) {
     state.quarter++;
     state.minutes = 12;
@@ -67,7 +68,7 @@ const decrementClock = game => {
       state.seconds = 30;
     }
   }
-}
+};
 
 export const playGame = game => {
   const { homeTeam, awayTeam, state } = game;
