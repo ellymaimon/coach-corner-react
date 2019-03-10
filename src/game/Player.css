@@ -1,12 +1,12 @@
 .player-container {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  max-width: 600px;
-  border: 1px solid red;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  max-width: 800px;
+  border: 1px solid rgb(165, 165, 165);
   height: 50px;
   align-items: center;
   text-align: center;
-  margin: 10px 10px;
+  margin: 10px auto;
 }
 
 .player-container:hover {
