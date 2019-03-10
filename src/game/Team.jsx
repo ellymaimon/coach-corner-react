@@ -1,15 +1,11 @@
 import React from 'react';
 import Players from './Players';
-import './Team.css';
 
 const Team = ({ team }) => {
   return (
     <div>
-      <h2>Active Players</h2>
-      <Players players={team.active} />
-
-      <h2>Bench Players</h2>
-      <Players players={team.bench} />
+      <Players players={team.active} status={'Active'}/>
+      {/* <Players players={team.bench} /> */}
     </div>
   );
 };
