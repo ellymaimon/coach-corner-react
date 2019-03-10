@@ -1,9 +1,14 @@
+.players-header {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 .category-row {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  max-width: 600px;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  max-width: 800px;
   height: 50px;
   align-items: center;
   text-align: center;
-  margin: 10px 10px;
+  margin: 10px auto;
 }
