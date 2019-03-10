@@ -1,3 +1,12 @@
 .boxscore {
   margin-top: 20px;
 }
+
+.boxscore-home,
+.boxscore-away {
+  margin-top: 50px;
+}
+
+.boxscore-heading {
+  text-align: center;
+}
