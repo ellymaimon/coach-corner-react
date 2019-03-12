@@ -2,7 +2,7 @@ import React from 'react';
 import Team from './Team';
 import './Boxscore.css';
 
-const Boxscore = ({game}) => {  
+const Boxscore = ({ game }) => {
   return (
     <div>
       <div className='boxscore'>
