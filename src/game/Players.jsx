@@ -2,7 +2,7 @@ import React from 'react';
 import Player from './Player';
 import './Players.css';
 
-const Players = ({ players, status }) => {
+const Players = ({ players, status, setSub, subOut, subIn }) => {
   return (
     <div>
       <h2 className='players-header'>{status} Players</h2>
@@ -17,7 +17,13 @@ const Players = ({ players, status }) => {
         <div>FG%</div>
       </div>
       {players.map(player => (
-        <Player key={player.id} player={player} />
+        <Player
+          key={player.id}
+          player={player}
+          setSub={setSub}
+          subOut={subOut}
+          subIn={subIn}
+        />
       ))}
     </div>
   );
