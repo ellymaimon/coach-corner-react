@@ -9,6 +9,11 @@
   margin: 10px auto;
 }
 
+.selected {
+  box-shadow: 0 0 5px rgba(0, 0, 0, .4);
+  background-color: rgb(212, 212, 212);
+}
+
 .player-container:hover {
   box-shadow: 0 0 5px rgba(0, 0, 0, .4)
 }
