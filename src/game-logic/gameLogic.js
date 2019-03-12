@@ -23,7 +23,36 @@ const shoot = (offense, stamina) => {
   }
 };
 
-const lowerEnergy = player => {
+const reEnergizePlayer = player => {
+  player.stamina += 50;
+  if (player.stamina > 100) {
+    player.stamina = 100;
+  }
+};
+
+const reEnergizeActivePlayers = active => {
+  active.forEach(player => {
+    reEnergizePlayer(player);
+  })
+}
+
+const reEnergizeBenchPlayers = bench => {
+  bench.forEach(player => {
+    reEnergizePlayer(player);
+  })
+}
+
+const reEnergizeTeam = team => {
+  reEnergizeActivePlayers(team.active);
+  reEnergizeBenchPlayers(team.bench);
+};
+
+const reEnergizeAllPlayers = game => {
+  reEnergizeTeam(game.homeTeam);
+  reEnergizeTeam(game.awayTeam);
+};
+
+const decrementEnergy = player => {
   if (player.endurance <= 100 && player.endurance > 75) {
     player.stamina >= 10 ? (player.stamina -= 10) : (player.stamina = 0);
   } else if (player.endurance <= 75 && player.endurance > 50) {
@@ -37,7 +66,7 @@ const lowerEnergy = player => {
 
 // Runs a posession for a given offensive team and two players head to head
 const simPosession = (oTeam, o, d) => {
-  lowerEnergy(o);
+  decrementEnergy(o);
   let points = 0;
   if (d.defense - o.offense > 25) {
     d.stops++;
@@ -60,6 +89,7 @@ const decrementClock = game => {
     state.seconds = 0;
     game.gameStop();
     state.isRunning = false;
+    reEnergizeAllPlayers(game);
   } else {
     if (state.seconds > 0) {
       state.seconds -= 30;
@@ -67,6 +97,10 @@ const decrementClock = game => {
       state.minutes--;
       state.seconds = 30;
     }
+  }
+
+  if (state.quarter === 3 && state.minutes === 12 && state.seconds === 0) {
+    game.homeTeam.timeouts = 3;
   }
 };
 
