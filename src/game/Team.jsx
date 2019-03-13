@@ -6,8 +6,10 @@ const Team = ({ team }) => {
   const game = useContext(Game);
   const [subOut, setSubOut] = useState(null);
   const [subIn, setSubIn] = useState(null);
+  const [, setFinishedASub] = useState(false);
 
   const subPlayers = () => {
+    setFinishedASub(false);
     if (subOut !== null && subIn !== null) {
       let subOutIndex = team.active.findIndex(
         player => player.id === subOut.id
@@ -19,7 +21,9 @@ const Team = ({ team }) => {
         team.active[subOutIndex],
       ];
     }
-    game.gameStart();
+    setFinishedASub(true);
+    setSubIn(null);
+    setSubOut(null);
   };
 
   return (
@@ -27,8 +31,16 @@ const Team = ({ team }) => {
       {subIn !== null && subOut !== null && game.state.allowSubs && (
         <button onClick={() => subPlayers()}>Complete Substitution</button>
       )}
-      {subOut && game.state.allowSubs && <p>Player selected to come out: {subOut.firstName} {subOut.lastName}</p>}
-      {subIn && game.state.allowSubs && <p>Player selected to come in: {subIn.firstName} {subIn.lastName}</p>}
+      {subOut && game.state.allowSubs && (
+        <p>
+          Player selected to come out: {subOut.firstName} {subOut.lastName}
+        </p>
+      )}
+      {subIn && game.state.allowSubs && (
+        <p>
+          Player selected to come in: {subIn.firstName} {subIn.lastName}
+        </p>
+      )}
       <Players
         players={team.active}
         status={'Active'}
