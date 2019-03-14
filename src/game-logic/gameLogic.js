@@ -1,6 +1,12 @@
-const getRandom = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
+import swish from '../assets/swish.mp3';
+import brick from '../assets/brick.mp3';
+export let latestScorerId;
+
+const SWISH = new Audio(swish);
+const BRICK = new Audio(brick);
+
+const getRandom = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
 
 // Checks if the game is over
 const gameOver = state => {
@@ -15,10 +21,13 @@ const shoot = (offense, stamina) => {
   missChance += fatigue;
 
   if (Math.floor(offense / 10) === Math.floor(missChance / 10) && stamina > 0) {
+    SWISH.play();
     return 3;
   } else if (offense > missChance) {
+    SWISH.play();
     return 2;
   } else {
+    BRICK.play();
     return 0;
   }
 };
@@ -33,14 +42,14 @@ const reEnergizePlayer = player => {
 const reEnergizeActivePlayers = active => {
   active.forEach(player => {
     reEnergizePlayer(player);
-  })
-}
+  });
+};
 
 const reEnergizeBenchPlayers = bench => {
   bench.forEach(player => {
     reEnergizePlayer(player);
-  })
-}
+  });
+};
 
 const reEnergizeTeam = team => {
   reEnergizeActivePlayers(team.active);
@@ -77,6 +86,9 @@ const simPosession = (oTeam, o, d) => {
     o.fieldGoalPercentage = (o.makes / o.shotsTaken) * 100;
     oTeam.points += points;
     o.points += points;
+    if(points > 0) {
+      latestScorerId = o.id;
+    }
   }
 };
 
