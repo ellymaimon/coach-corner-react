@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Game from '../game-logic/GameStore';
 import './Player.css';
 
-const Player = ({ player, setSub, subOut, subIn }) => {
+const Player = ({ player, setSub, subOut, subIn, lastToScoreId }) => {
   const game = useContext(Game);
   const [selected, setSelected] = useState(false);
 
@@ -15,7 +15,7 @@ const Player = ({ player, setSub, subOut, subIn }) => {
     } else {
       setSelected(false);
     }
-  }, [subOut, subIn, game.state.allowSubs]);
+  }, [subOut, subIn, game.state.allowSubs, lastToScoreId]);
 
   const {
     firstName,
@@ -31,6 +31,7 @@ const Player = ({ player, setSub, subOut, subIn }) => {
 
   return (
     <div>
+      
       {selected ? (
         <div className='player-container selected'>
           <div>
@@ -46,7 +47,7 @@ const Player = ({ player, setSub, subOut, subIn }) => {
         </div>
       ) : (
         <div
-          className='player-container'
+          className={lastToScoreId === player.id ? 'player-container player-scored' : 'player-container'} 
           onClick={() => {
             game.state.allowSubs && setSub(player);
           }}
