@@ -9,6 +9,11 @@
   margin: 10px auto;
 }
 
+.player-scored {
+  background-color: #3b9618;
+  color: white;
+}
+
 .selected {
   box-shadow: 0 0 5px rgba(0, 0, 0, .4);
   background-color: rgb(212, 212, 212);
