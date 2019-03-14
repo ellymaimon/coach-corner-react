@@ -33,7 +33,7 @@ export class Game {
   };
 
   gameStart = () => {
-    this.intervalId = setInterval(() => this.runGame(), 500);
+    this.intervalId = setInterval(() => this.runGame(), 1000);
     this.state.isRunning = true;
     this.state.allowSubs = false;
   };
