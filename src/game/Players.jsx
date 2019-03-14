@@ -2,7 +2,7 @@ import React from 'react';
 import Player from './Player';
 import './Players.css';
 
-const Players = ({ players, status, setSub, subOut, subIn }) => {
+const Players = ({ players, status, setSub, subOut, subIn, lastToScoreId }) => {
   return (
     <div>
       <h2 className='players-header'>{status} Players</h2>
@@ -23,6 +23,7 @@ const Players = ({ players, status, setSub, subOut, subIn }) => {
           setSub={setSub}
           subOut={subOut}
           subIn={subIn}
+          lastToScoreId={lastToScoreId}
         />
       ))}
     </div>
