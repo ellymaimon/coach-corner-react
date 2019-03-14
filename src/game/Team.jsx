@@ -1,16 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Game from '../game-logic/GameStore';
 import Players from './Players';
+import SubConfirmation from './SubConfirmation';
+import { latestScorerId } from '../game-logic/gameLogic';
 
 const Team = ({ team }) => {
   const game = useContext(Game);
   const [subOut, setSubOut] = useState(null);
   const [subIn, setSubIn] = useState(null);
-  const [, setFinishedASub] = useState(false);
+  const [lastToScoreId, setLastToScoreId] = useState(null);
+
+  useEffect(() => {
+    setLastToScoreId(latestScorerId);
+  }, [latestScorerId]);
 
   const subPlayers = () => {
-    setFinishedASub(false);
-    if (subOut !== null && subIn !== null) {
+    if (subOut && subIn) {
       let subOutIndex = team.active.findIndex(
         player => player.id === subOut.id
       );
@@ -21,31 +26,24 @@ const Team = ({ team }) => {
         team.active[subOutIndex],
       ];
     }
-    setFinishedASub(true);
     setSubIn(null);
     setSubOut(null);
   };
 
   return (
     <div>
-      {subIn !== null && subOut !== null && game.state.allowSubs && (
-        <button onClick={() => subPlayers()}>Complete Substitution</button>
-      )}
-      {subOut && game.state.allowSubs && (
-        <p>
-          Player selected to come out: {subOut.firstName} {subOut.lastName}
-        </p>
-      )}
-      {subIn && game.state.allowSubs && (
-        <p>
-          Player selected to come in: {subIn.firstName} {subIn.lastName}
-        </p>
-      )}
+      <SubConfirmation
+        subIn={subIn}
+        subOut={subOut}
+        allowed={game.state.allowSubs}
+        subPlayers={subPlayers}
+      />
       <Players
         players={team.active}
         status={'Active'}
         setSub={setSubOut}
         subOut={subOut}
+        lastToScoreId={lastToScoreId}
       />
       <Players
         players={team.bench}
